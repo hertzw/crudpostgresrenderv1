@@ -21,14 +21,14 @@ def main():
         if st.button("Create"):
             sql= "insert into users(name,email) values(%s,%s)"
             val= (name,email)
-            repositorio.mysqlcursor.execute(sql,val)
+            repositorio.cursor.execute(sql,val)
             repositorio.mydb.commit()
             st.success("Registro salvo")
 
     elif option=="Read":
         st.subheader("Ler Registro")
-        repositorio.mysqlcursor.execute("select * from users")
-        result = repositorio.mysqlcursor.fetchall()
+        repositorio.cursor.execute("select * from users")
+        result = repositorio.cursor.fetchall()
         for row in result:
             st.write(row)
 
@@ -40,7 +40,7 @@ def main():
         if st.button("Update"):
             sql="update users set name=%s, email=%s where id =%s"
             val=(name,email,id)
-            repositorio.mysqlcursor.execute(sql,val)
+            repositorio.cursor.execute(sql,val)
             repositorio.mydb.commit()
             st.success("Registro Salvo")
 
@@ -50,7 +50,7 @@ def main():
         if st.button("Delete"):
             sql="delete from users where id =%s"
             val=(id,)
-            repositorio.mysqlcursor.execute(sql,val)
+            repositorio.cursor.execute(sql,val)
             repositorio.mydb.commit()
             st.success("Registro removido")
 
