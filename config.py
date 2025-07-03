@@ -1,16 +1,14 @@
 import psycopg2
-import os
-from dotenv import load_dotenv
-
-load_dotenv()  # Carrega as variáveis do arquivo .env
+import streamlit as st
 
 class repositorio():
     mydb = psycopg2.connect(
-        host=os.getenv("DB_HOST"),
-        user=os.getenv("DB_USER"),
-        password=os.getenv("DB_PASSWORD"),
-        dbname=os.getenv("DB_NAME"),
-        port=os.getenv("DB_PORT", 5432)
-    )  # Conexão com dados do banco de dados e PostgreSQL
+        host=st.secrets["postgres"]["host"],
+        user=st.secrets["postgres"]["user"],
+        password=st.secrets["postgres"]["password"],
+        dbname=st.secrets["postgres"]["database"],
+        port=st.secrets["postgres"]["port"]
+    )
     cursor = mydb.cursor()
+
 
